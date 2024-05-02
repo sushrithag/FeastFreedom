@@ -1,0 +1,35 @@
+<div style="text-align: center;">
+  <h3 >User Sign Up</h3><br>
+  <button class="btn text-bg-dark " routerLink="/user_login">&nbsp;&nbsp;Click here</button>                     
+</div>
+<div class="container bcontent">
+  <h3 >Kitchen Menu</h3><br>                    
+                      
+  <table class="table table-sm table-bordered">
+      <thead>
+        <tr>                        
+          <th scope="col">Item</th>
+          <th scope="col">Category</th>
+          <th scope="col">Price</th>                            
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor= "let item of menus; let i=index">                                                  
+          <td>{{item.itemName}}</td>
+          <td>{{item.vegNonVeg}}</td>
+          <td>${{item.price}}</td>                                                      
+          <td >                             
+              <input type="checkbox" name="kitchenmenuitem" value="addtocart(item)" (change)="getFood($event,item)" class="form-check-input">
+              Add to cart
+           &nbsp; </tr>  
+         
+          <tr>                            
+            <button class="btn text-bg-success w-25" (click)="confirmation()">Add</button> &nbsp;&nbsp; &nbsp;                     
+           <button class="btn bg-primary w-25" routerLink="/products">Back</button>                                               
+        </tr>
+             
+     </tbody>                       
+</table>  
+</div>
+
+

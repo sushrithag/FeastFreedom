@@ -1,0 +1,35 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="elevated-border p-3" style="text-align: center; background-color: #fff;">
+          <h1 style="color: #4267b2; font-weight: 700;">Welcome!</h1>
+          <div>
+              <div>
+                  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                      <div class="form-group">
+                          <input class="form-control" type="email" id="email" name="email" placeholder="Email" [(ngModel)]="creds.email" required #email="ngModel"/>
+                          <div class="text-danger" *ngIf="email.errors && email.touched">
+                              <span *ngIf="email.errors['required']">Email is required</span>
+                          </div>
+                      </div>
+                      <br/>
+                      <div class="form-group">
+                          <input class="form-control" type="password" id="pwd" name="password" placeholder="Password" [(ngModel)]="creds.password" required #pwd="ngModel"/>
+                          <div class="text-danger" *ngIf="pwd.errors && pwd.touched">
+                              <span *ngIf="pwd.errors['required']">Password is required</span>
+                          </div>
+                      </div>
+                      <br/>
+                      <div class="form-group">
+                          <button class="btn btn-primary w-100" type="submit">Login</button>
+                      </div>
+                      <hr>
+              </form>
+              <div class="form-group">
+                  <h6>Please create an account to access enhanced features.</h6>
+                  <button class="btn w-50"  routerLink="/register_user" style="background-color: #42B72A; color: white;">Create Account</button>
+              </div>
+              </div>
+              </div>
+  </div>
+  </div>
+      
+  

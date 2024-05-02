@@ -1,0 +1,144 @@
+<!-- Page 1 -->
+<!-- <div class="d-flex justify-content-center align-items-center vh-100"> -->
+  <div class="elevated-border p-3" style="text-align: center; background-color: #fff;">
+    <!-- <h1 style="color: #4267b2; font-weight: 700;">Welcome!</h1> -->
+
+      <form *ngIf="!showPage2" (ngSubmit)="goToPage2()" #registerForm="ngForm" class="container">
+        <h2 class="mb-3" style="color: #4267b2; font-weight: 700;" >Kitchen Details</h2>
+        <div class="mb-3">
+            <label for="serviceProviderName" class="form-label">Service Provider Name:</label>
+            <input type="text" id="serviceProviderName" name="serviceProviderName" required maxlength="50" [(ngModel)]="kitchen.serviceProviderName" class="form-control" #serviceProviderName = "ngModel">
+            <div class="text-danger" *ngIf="serviceProviderName.errors && serviceProviderName.touched">
+                <span *ngIf="serviceProviderName.errors['required']">Service Provider Name is required</span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" id="email" name="email" required maxlength="50" [(ngModel)]="kitchen.email" class="form-control" #email="ngModel">
+          <div class="text-danger" *ngIf="email.errors && email.touched">
+            <span *ngIf="email.errors['required']">Email is required</span>
+        </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" id="password" name="password" required minlength="6" maxlength="10" [(ngModel)]="kitchen.password" class="form-control" #password="ngModel">
+            <div class="text-danger" *ngIf="password.errors && password.touched">
+                <span *ngIf="password.errors['required']">Password is required</span>
+                <span *ngIf="password.errors['minlength']">Password is too short</span>
+                <span *ngIf="password.errors['maxlength']">Password is too long</span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6" maxlength="10" [(ngModel)]="kitchen.confirmPassword" class="form-control" #confirmPassword="ngModel">
+            <div *ngIf="kitchen.password !== kitchen.confirmPassword" class="text-danger">Passwords do not match!</div>
+            <div class="text-danger" *ngIf="confirmPassword.errors && confirmPassword.touched">
+                <span *ngIf="confirmPassword.errors['required']">Confirm Password is required</span>
+                <span *ngIf="confirmPassword.errors['minlength']">Confirm Password is too short</span>
+                <span *ngIf="confirmPassword.errors['maxlength']">Confirm Password is too long</span>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+          <button type="submit" [disabled]="registerForm.invalid || kitchen.password !== kitchen.confirmPassword" class="btn btn-primary">Next</button>
+        </div>
+      </form>
+
+      <!-- Page 2 -->
+      <form *ngIf="showPage2" (ngSubmit)="registerKitchen()" #registerForm2="ngForm" class="container">
+        <h2 class="mb-3">Kitchen Details</h2>
+
+        <div class="mb-3">
+          <label class="form-label">Kitchen Working Days:</label>
+          <div>
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysMonday" value="Monday" (change)="toggleDay('Monday')" [checked]="isDaySelected('Monday')" class="form-check-input">
+                Monday
+            </label> &nbsp;
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysTuesday" value="Tuesday" (change)="toggleDay('Tuesday')" [checked]="isDaySelected('Tuesday')" class="form-check-input">
+                Tuesday
+            </label> &nbsp;
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysWednesday" value="Wednesday" (change)="toggleDay('Wednesday')" [checked]="isDaySelected('Wednesday')" class="form-check-input">
+                Wednesday
+            </label> &nbsp;
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysThursday" value="Thursday" (change)="toggleDay('Thursday')" [checked]="isDaySelected('Thursday')" class="form-check-input">
+                Thursday
+            </label> &nbsp;
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysFriday" value="Friday" (change)="toggleDay('Friday')" [checked]="isDaySelected('Friday')" class="form-check-input">
+                Friday
+            </label> &nbsp;
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysSaturday" value="Saturday" (change)="toggleDay('Saturday')" [checked]="isDaySelected('Saturday')" class="form-check-input">
+                Saturday
+            </label> &nbsp;
+            <label class="form-check-label">
+                <input type="checkbox" name="kitchenWorkingDaysSunday" value="Sunday" (change)="toggleDay('Sunday')" [checked]="isDaySelected('Sunday')" class="form-check-input">
+                Sunday
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="row g-2">
+            <div class="form-group">
+                <label for="kitchenWorkingTimeStart">Start Time:</label>
+                <input type="time" id="kitchenWorkingTimeStart" name="kitchenWorkingTimeStart" [(ngModel)]="kitchen.kitchenWorkingTimeStart" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="kitchenWorkingTimeEnd">End Time:</label>
+                <input type="time" id="kitchenWorkingTimeEnd" name="kitchenWorkingTimeEnd" [(ngModel)]="kitchen.kitchenWorkingTimeEnd" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="kitchenImage" class="form-label">Kitchen Image:</label>
+          <input type="file" id="kitchenImage" name="kitchenImage" (change)="handleImageUpload($event)" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <h3 class="mb-3">Kitchen Menu</h3>
+            <div *ngFor="let menuItem of kitchen.menuItems; let i = index">
+                <div class="row g-2">
+                <div class="col">
+                    <label class="form-label">Item Name:</label>
+                    <input type="text" name="itemName{{i}}" [(ngModel)]="menuItem.itemName" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">Veg/Non-Veg:</label>
+                    <select name="vegNonVeg{{i}}" [(ngModel)]="menuItem.vegNonVeg" class="form-control">
+                    <option value="Veg">Veg</option>
+                    <option value="Non-Veg">Non-Veg</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label">Price:</label>
+                    <input type="number" name="price{{i}}" [(ngModel)]="menuItem.price" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label">Remove Entry:</label>
+                    <br/>
+                    <button type="button" (click)="deleteMenuItem(i)" class="btn btn-danger">Delete</button>
+                </div>
+                </div>
+            </div>
+            <button type="button" (click)="addMenuItem()" class="btn btn-secondary mt-3">Add Menu Item</button>
+            </div>          
+
+        <div class="d-grid gap-2">
+          <button type="button" (click)="goToPage1()" class="btn btn-secondary">Previous</button>
+          <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+          <button type="submit" [disabled]="registerForm2.invalid" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+  </div>
+<!-- </div> -->

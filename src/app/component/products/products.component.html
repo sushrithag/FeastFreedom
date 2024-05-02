@@ -1,0 +1,55 @@
+<div class="card-top container-fluid">
+    <!-- <div class="container d-flex">
+       <div class="item">
+        <a> <img style="width:64px; margin-top:5px;"src="https://yo-image-bucket.s3.amazonaws.com/logo.webp" alt="" />
+           <h5>FeastFreedom.com</h5>
+        </a>
+    </div>      
+     <div class="item1">
+        <a>
+        <button stayle="margin-top: 100px;" class="btn btn-primary " routerLink="/registration">Provider Register Now</button>
+    </a> &nbsp;&nbsp;&nbsp;&nbsp; 
+    <a routerLink="/user_login">
+        <img style="width:64px; margin-top:5px;"src="https://yo-image-bucket.s3.amazonaws.com/p2.jpeg"></a>
+       <p style="text-align: end;margin-right: 16px;">{{username}}</p>
+    </div>  -->
+    <!-- <div class="item1">
+        <a>
+          <button style="margin-top: 100px;" class="btn btn-primary" routerLink="/registration">Provider Register Now</button>
+        </a>
+        <div style="display: flex; align-items: center;">
+          <a routerLink="/user_login">
+            <img style="width: 64px; margin-top: 5px;" src="https://yo-image-bucket.s3.amazonaws.com/p2.jpeg">
+          </a>
+          <div style="margin-left: 10px;">
+            <a routerLink="/user_login">{{ username }}</a>
+          </div>
+        </div>
+    </div>    -->
+</div>
+
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let item of productList">
+        <div class="card col-md-3">
+            <div class="dropdown">
+
+                <!-- <button class="dropbtn"><img src="{{item.image}}" alt=""></button> -->
+                <div class="dropdown-content">
+                  <a href="#">Menu Item 1</a>
+                  <a href="#">Menu Item 2</a>
+                  <a href="#">Menu Item 3</a>
+                </div>
+              </div>
+              <!-- <button routerLink="/cart"><img src="{{item.image}}" alt=""></button> -->
+            <button class="btn "  routerLink="/menu/{{item.id}}"><img src="{{item.kitchenImage}}" alt=""></button>
+            <h5 style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 100ch; text-align: center;">{{item.serviceProviderName}}</h5>
+            <!-- <p style="white-space:nowrap;overflow:hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.k_veg_nonveg}}</p> -->
+            <!-- <p><strong>Price:</strong>${{item.k_price}}</p>-->
+            <!-- <button class="btn btn-outline-primary" (click)=addtocart(item)  routerLink="/cart">Add to cart</button>   -->
+        </div>
+    </ng-container>
+    </div>
+</div>
+
+

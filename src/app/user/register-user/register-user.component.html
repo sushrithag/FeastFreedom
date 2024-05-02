@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center vh-75">
+    <div class="elevated-border p-3" style="background-color: #fff;">
+    <div class="container">
+        <br/>
+        <br/>
+        <h4>Enter the user details to create an account: </h4>
+        <br/>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input class="form-control" type="text" id="id" name="id" ngModel disabled/>
+            </div>
+            <div class="form-group">
+                <label for="fn">First Name</label>
+                <input class="form-control" type="text" id="fn" name="firstname" ngModel required minlength=4 #fn="ngModel"/>
+                <div class="text-danger" *ngIf="fn.errors && fn.touched">
+                    <span *ngIf="fn.errors['required']">First Name is required</span>
+                    <span *ngIf="fn.errors['minlength']">First Name is too short</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ln">Last Name</label>
+                <input class="form-control" type="text" id="ln" name="lastname" ngModel required minlength=4 #ln="ngModel"/>
+                <div class="text-danger" *ngIf="ln.errors && ln.touched">
+                    <span *ngIf="ln.errors['required']">Last Name is required</span>
+                    <span *ngIf="ln.errors['minlength']">Last Name is too short</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input class="form-control" type="password" id="pwd" name="password" ngModel required minlength=4 #pwd="ngModel"/>
+                <div class="text-danger" *ngIf="pwd.errors && pwd.touched">
+                    <span *ngIf="pwd.errors['required']">Password is required</span>
+                    <span *ngIf="pwd.errors['minlength']">Password is too short</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input class="form-control" type="number" id="phone" name="phone" ngModel required #phone="ngModel"/>
+                <div class="text-danger" *ngIf="phone.errors && phone.touched">
+                    <span *ngIf="phone.errors['required']">Phone number is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" id="email" name="email" ngModel required #email="ngModel"/>
+                <div class="text-danger" *ngIf="email.errors && email.touched">
+                    <span *ngIf="email.errors['required']">Email is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input class="form-control" type="text" id="address" name="address" ngModel required #address="ngModel"/>
+                <div class="text-danger" *ngIf="address.errors && address.touched">
+                    <span *ngIf="address.errors['required']">Address is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="securityquestion1">Security Question 1</label>
+                <select class="form-control" id="securityquestion1" name="securityquestion1" ngModel required #securityquestion1="ngModel">
+                    <option *ngFor="let faq of seqQue" [value]="faq.secQuesVal">{{faq.secQues}}</option>
+                </select>
+                <label for="answer1">Answer 1</label>
+                <input class="form-control" type="password" id="answer1" name="answer1" ngModel required #answer1="ngModel"/>
+            </div>
+            <div class="form-group">
+                <label for="securityquestion2">Security Question 2</label>
+                <select class="form-control" id="securityquestion2" name="securityquestion2" ngModel required #securityquestion2="ngModel">
+                    <option *ngFor="let faq of seqQue" [value]="faq.secQuesVal">{{faq.secQues}}</option>
+                </select>
+                <label for="answer2">Answer 2</label>
+                <input class="form-control" type="password" id="answer2" name="answer2" ngModel required #answer2="ngModel"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <button class="btn btn-primary w-30" type="submit" [disabled]="f.invalid">Register</button>
+            </div>
+    
+        </form>
+    </div>
+</div>
+</div> 
+    
